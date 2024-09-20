@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
@@ -44,4 +45,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Summary of username
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function username(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => "user" . str_pad($this->id, 4, '0', STR_PAD_LEFT),
+        );
+    }
+    
 }
