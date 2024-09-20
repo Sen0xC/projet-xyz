@@ -26,6 +26,8 @@ return new class extends Migration
         schema::table('users', function (Blueprint $table) {
             $table->timestamp('email_verified_at');
             $table->dropColumn('avatar');
+            $table->dropColumn('name');
+
         });
     }
 };
